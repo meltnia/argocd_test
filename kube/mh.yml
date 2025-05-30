@@ -25,8 +25,7 @@ spec:
           cpu: 0.5
           memory: 20Mi
         request:
-          cpu: 0.2
-          memory: 5Mi
+          memory: 10Mi
       imagePullSecrets:
       - name : ghcr-secret
       volumes:
