@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mh-flask
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mh-flask
+  template:
+    metadata:
+      labels:
+        app: mh-flask
+    spec:
+      containers:
+      - name: mh-flask
+        image: ghcr.io/meltnia/mh-flask:latest
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - name: mh-volume
+          mountPath: /downloadData
+      imagePullSecrets:
+      - name : ghcr-secret
+      volumes:
+      - name: mh-volume
+        persistentVolumeClaim:
+          claimName: nfs-pvc
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mh-service
+spec:
+  selector:
+    app: mh-flask
+  type: NodePort
+  ports:
+  - port: 5000
+    targetPort: 5000
+    nodePort: 31000
+
