@@ -20,10 +20,10 @@ spec:
         volumeMounts:
         - name: mh-volume
           mountPath: /downloadData
-      resource:
-        limits:
-          cpu: 0.5
-          memory: 20Mi
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "20Mi"
       imagePullSecrets:
       - name : ghcr-secret
       volumes:
