@@ -25,7 +25,7 @@ spec:
             cpu: "500m"
             memory: "100Mi"
       imagePullSecrets:
-      - name : github-token
+      - name : ghcr-secret
       volumes:
       - name: mh-volume
         persistentVolumeClaim:
